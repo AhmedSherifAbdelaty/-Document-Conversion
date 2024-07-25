@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "5d472bb7-a450-4147-916f-fba371a7aed1",
+		"name": "Doc-Conversion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24695466",
+		"_collection_link": "https://cloudy-spaceship-30081.postman.co/workspace/My-Workspace~8aa8721d-2251-4918-8161-e208940c6626/collection/24695466-5d472bb7-a450-4147-916f-fba371a7aed1?action=share&source=collection_link&creator=24695466"
+	},
+	"item": [
+		{
+			"name": "uploadFile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/user/Downloads/large_text_document (2).docx"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/documents/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"documents",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "convert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"documentId\" : 1 ,\r\n    \"targetFormat\" : \"pdf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/documents/convert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"documents",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/user/Desktop/Database.docx",
+							"disabled": true
+						},
+						{
+							"key": "filePath",
+							"value": "C:\\Users\\user\\Desktop.Database.docx",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/documents/1/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"documents",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadFile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/documents/1/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"documents",
+						"1",
+						"download"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
