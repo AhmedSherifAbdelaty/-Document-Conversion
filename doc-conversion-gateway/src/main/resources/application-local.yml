@@ -1,0 +1,67 @@
+server:
+  port: 8082
+
+
+
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  application:
+    name: doc-conversion-gateway
+  cloud:
+    gateway:
+        routes:
+        - id: upload
+          uri: http://localhost:8080/api/documents/upload
+          predicates:
+            - Path=/api/documents/upload
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 20 #20 token is added to the bucket per second.
+                redis-rate-limiter.burstCapacity: 40 #means that the bucket can hold up to 40 token at a time.
+                redis-rate-limiter.requestedTokens: 1 #each request needs 1 token to proceed.
+
+        - id: convert
+          uri: http://localhost:8080/api/documents/convert
+          predicates:
+            - Path=/api/documents/convert
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 20
+                redis-rate-limiter.burstCapacity: 40
+                redis-rate-limiter.requestedTokens: 1
+
+
+        - id: status
+          uri: http://localhost:8080/api/documents/{documentId}/status
+          predicates:
+            - Path=/api/documents/{id}/status
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 20
+                redis-rate-limiter.burstCapacity: 40
+                redis-rate-limiter.requestedTokens: 1
+
+
+
+        - id: download
+          uri: http://localhost:8080/api/documents/{documentId}/download
+          predicates:
+            - Path=/api/documents/{documentId}/download
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 20
+                redis-rate-limiter.burstCapacity: 40
+                redis-rate-limiter.requestedTokens: 1
+
+        httpclient:
+          connect-timeout: 2000
+          response-timeout: 30000
+
+
