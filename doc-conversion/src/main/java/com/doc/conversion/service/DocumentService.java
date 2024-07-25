@@ -57,8 +57,11 @@ public class DocumentService {
         }
     }
 
-    public String getDocumentStatus(Long documentId) {
-        DocumentConversionProgress documentConversionProgress = documentConversionProgressRepository.findFirstByDocumentIdOrderByCreatedAtDesc(documentId);
-        return documentConversionProgress.getStatus();
+    public String getDocumentStatus(Long documentId) throws DocumentNotFound {
+        Optional<DocumentConversionProgress> documentConversionProgress = documentConversionProgressRepository.findFirstByDocumentIdOrderByCreatedAtDesc(documentId);
+        if (documentConversionProgress.isEmpty()) {
+            throw new DocumentNotFound("Document not found");
+        }
+        return documentConversionProgress.get().getStatus();
     }
 }

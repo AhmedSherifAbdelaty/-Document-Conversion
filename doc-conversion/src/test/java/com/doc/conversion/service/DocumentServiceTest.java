@@ -3,6 +3,7 @@ package com.doc.conversion.service;
 import com.doc.conversion.dto.DocumentUploadResponse;
 import com.doc.conversion.entity.Document;
 import com.doc.conversion.entity.DocumentConversionProgress;
+import com.doc.conversion.exception.DocumentNotFound;
 import com.doc.conversion.exception.InvalidDocumentException;
 import com.doc.conversion.repository.DocumentConversionProgressRepository;
 import com.doc.conversion.repository.DocumentRepository;
@@ -82,11 +83,11 @@ public class DocumentServiceTest {
     }
 
     @Test
-    void testGetDocumentStatus() {
+    void testGetDocumentStatus() throws DocumentNotFound {
         Long documentId = 1L;
         DocumentConversionProgress progress = new DocumentConversionProgress();
         progress.setStatus("completed");
-        when(documentConversionProgressRepository.findFirstByDocumentIdOrderByCreatedAtDesc(documentId)).thenReturn(progress);
+        when(documentConversionProgressRepository.findFirstByDocumentIdOrderByCreatedAtDesc(documentId)).thenReturn(Optional.of(progress));
 
         String status = documentService.getDocumentStatus(documentId);
 
