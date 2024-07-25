@@ -20,7 +20,7 @@ To set up the application, ensure that you have the following installed:
 - Redis
 - Postgres
 
-Alternatively, you can use Docker. Navigate to the directory containing `docker-compose.yml` and run the following command:
+Alternatively, you can use Docker. Run maven install to  **doc-conversion** and **document-conversion-gateway** then  Navigate to the directory containing `docker-compose.yml` and run the following command:
 ```
 docker-compose up
 ```
