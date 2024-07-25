@@ -26,7 +26,7 @@ docker-compose up
 ```
 
 ## Usage
-The application provides the following endpoints:
+The application provides the following endpoints which you can find in doc-conversion postman collection:
 
 ### Upload Document
 **POST** `/api/documents/upload`
