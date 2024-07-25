@@ -26,7 +26,8 @@ jobs:
         run: sleep 30
 
       - name: Run unit tests
-        run: docker-compose exec -T doc-conversion mvn test -Dtest=*test
+        run: docker-compose run --rm doc-conversion mvn test -Dtest=*test
+
 
       - name: Shutdown Docker Compose
         run: docker-compose down
