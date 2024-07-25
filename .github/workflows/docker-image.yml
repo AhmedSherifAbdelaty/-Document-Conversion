@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Run services
+        run: |
+          docker-compose -f docker-compose.yml up -d
+
+      - name: Run tests
+        run: |
+          docker-compose -f docker-compose.yml run doc-conversion ./run_tests.sh+%s)
