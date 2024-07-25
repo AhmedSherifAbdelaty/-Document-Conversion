@@ -15,8 +15,8 @@ jobs:
     steps:
       - name: Run services
         run: |
-          docker-compose -f docker-compose.yml up -d
+          docker-compose -f docker-compose up -d
 
       - name: Run tests
         run: |
-          docker-compose -f docker-compose.yml run doc-conversion ./run_tests.sh+%s)
+          docker-compose -f docker-compose run doc-conversion ./run_tests.sh+%s)
