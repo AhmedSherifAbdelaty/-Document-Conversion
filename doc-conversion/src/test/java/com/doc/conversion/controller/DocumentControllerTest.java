@@ -2,6 +2,7 @@ package com.doc.conversion.controller;
 
 import com.doc.conversion.dto.DocumentConversionRequest;
 import com.doc.conversion.dto.DocumentUploadResponse;
+import com.doc.conversion.exception.DocumentNotFound;
 import com.doc.conversion.exception.InvalidDocumentException;
 import com.doc.conversion.message_queue.RabbitMQProducer;
 import com.doc.conversion.service.DocumentService;
@@ -62,7 +63,7 @@ public class DocumentControllerTest {
     }
 
     @Test
-    void testGetDocumentStatus() {
+    void testGetDocumentStatus() throws DocumentNotFound {
         Long documentId = 1L;
         String status = "completed";
         when(documentService.getDocumentStatus(documentId)).thenReturn(status);

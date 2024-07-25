@@ -2,6 +2,7 @@ package com.doc.conversion.controller;
 
 import com.doc.conversion.dto.DocumentConversionRequest;
 import com.doc.conversion.dto.DocumentUploadResponse;
+import com.doc.conversion.exception.DocumentNotFound;
 import com.doc.conversion.exception.InvalidDocumentException;
 import com.doc.conversion.message_queue.RabbitMQProducer;
 import com.doc.conversion.service.DocumentService;
@@ -44,7 +45,7 @@ public class DocumentController {
     }
 
     @GetMapping("/{documentId}/status")
-    public ResponseEntity<String> getDocumentStatus(@PathVariable Long documentId) {
+    public ResponseEntity<String> getDocumentStatus(@PathVariable Long documentId) throws DocumentNotFound {
         String status  = documentService.getDocumentStatus(documentId);
         return ResponseEntity.ok(status);
     }
