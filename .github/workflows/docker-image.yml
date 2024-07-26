@@ -25,14 +25,25 @@ jobs:
       - name: Run Docker Compose
         run: docker-compose up -d
 
-      - name: Wait for services to be healthy
-        run: sleep 30 # Adjust as necessary or implement a better health check
 
       - name: Run unit tests for doc-conversion
         run: docker-compose run --rm doc-conversion-test
 
       - name: Run unit tests for doc-conversion-gateway
         run: docker-compose run --rm doc-conversion-gateway-test
+
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=my-org
+            -Dsonar.projectKey=Document_Conversion
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
 
 
       - name: Shutdown Docker Compose
