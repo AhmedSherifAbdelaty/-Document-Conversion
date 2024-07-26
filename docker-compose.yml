@@ -60,24 +60,22 @@ services:
 
 
   doc-conversion-test:
-    build:
-      context: ./doc-conversion
-      dockerfile: Dockerfile
+    image: maven:3.8.6-eclipse-temurin-17-alpine
     container_name: doc-conversion-test
+    working_dir: /app
+    volumes:
+      - ./doc-conversion:/app
     entrypoint: [ "mvn", "test" ]
-    depends_on:
-      - postgres
-      - rabbitmq
+
 
   doc-conversion-gateway-test:
-      build:
-        context: ./doc-conversion-gateway
-        dockerfile: Dockerfile
-      container_name: doc-conversion-gateway-test
-      entrypoint: [ "mvn", "test" ]
-      depends_on:
-        - redis
-        - doc-conversion
+    image: maven:3.8.6-eclipse-temurin-17-alpine
+    container_name: doc-conversion-gateway-test
+    working_dir: /app
+    volumes:
+      - ./doc-conversion-gateway:/app
+    entrypoint: [ "mvn", "test" ]
+
 
 volumes:
   postgres_data:
