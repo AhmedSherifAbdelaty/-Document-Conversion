@@ -1,10 +1,12 @@
-# microservice/Dockerfile
-FROM eclipse-temurin:21-jre-alpine
+# doc-conversion-gateway/Dockerfile
+# Stage 1: Build the JAR
+FROM maven:3.8.6-eclipse-temurin-17-alpine AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean install package -DskipTests
 
-ARG JAR_FILE=target/*.jar
-
-COPY ${JAR_FILE} app.jar
-
+# Stage 2: Copy the JAR to a lighter image
+FROM eclipse-temurin:17-jre-alpine
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8082
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
