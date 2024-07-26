@@ -34,12 +34,24 @@ jobs:
 
 
       # Run SonarQube scan for the 'doc-conversion' microservice
-      - name: Run SonarQube Scan for doc-conversion
+      - name: Install SonarQube Scanner
+        working-directory: ./doc-conversion
         run: |
-          cd doc-conversion
+          # Example of installing SonarQube Scanner (adjust as necessary)
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+          unzip sonar-scanner.zip
+          sudo mv sonar-scanner-*/bin/sonar-scanner /usr/local/bin/
+        shell: bash
+
+      # Run SonarQube scan for the 'doc-conversion' microservice
+      - name: Run SonarQube Scan for doc-conversion
+        working-directory: ./doc-conversion
+        run: |
+          sonar-scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: 'https://sonarcloud.io/'
+
 
 
 
