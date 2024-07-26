@@ -34,10 +34,7 @@ jobs:
 
 
       - name: Run SonarQube Scan for doc-conversion
-        uses: sonarsource/sonarqube-scan-action@v2
-        with:
-          projectKey: 'AhmedSherifAbdelaty_DocumentConversion'
-          organization: 'docconversion'
+        uses: sonarsource/sonarqube-scan-action@v2  
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: 'https://sonarcloud.io/'
