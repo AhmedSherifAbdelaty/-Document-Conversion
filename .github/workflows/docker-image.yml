@@ -19,17 +19,17 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Set up JARsFiles
-        uses: docker-compose build
+      - name: Build Docker images
+        run: docker-compose build
 
       - name: Run Docker Compose
-        run: docker-compose up
+        run: docker-compose up -d
 
       - name: Wait for services to be healthy
-        run: sleep 30
+        run: sleep 30 # Adjust as necessary or implement a better health check
 
+      - name: Run tests
+        run: docker-compose run --rm <your_test_service> # Replace <your_test_service> with the appropriate service for running tests
 
       - name: Shutdown Docker Compose
         run: docker-compose down
-
-
