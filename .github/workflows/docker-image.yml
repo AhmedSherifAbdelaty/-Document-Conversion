@@ -28,8 +28,12 @@ jobs:
       - name: Wait for services to be healthy
         run: sleep 30 # Adjust as necessary or implement a better health check
 
-      - name: Run tests
-        run: docker-compose run --rm <your_test_service> # Replace <your_test_service> with the appropriate service for running tests
+      - name: Run unit tests for doc-conversion
+        run: docker-compose run --rm doc-conversion-test
+
+      - name: Run unit tests for doc-conversion-gateway
+        run: docker-compose run --rm doc-conversion-gateway-test
+
 
       - name: Shutdown Docker Compose
         run: docker-compose down
