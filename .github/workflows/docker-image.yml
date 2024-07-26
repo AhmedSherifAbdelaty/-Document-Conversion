@@ -34,12 +34,12 @@ jobs:
 
       - name: Tag and Push doc-conversion Image
         run: |
-            docker tag doc-conversion:latest ${{ secrets.DOCKER_HUB_USERNAME }}/doc-conversion:latest
+            docker tag doc-conversion ${{ secrets.DOCKER_HUB_USERNAME }}/doc-conversion:latest
             docker push ${{ secrets.DOCKER_HUB_USERNAME }}/doc-conversion:latest
 
       - name: Tag and Push doc-conversion-gateway Image
         run: |
-          docker tag doc-conversion-gateway:latest ${{ secrets.DOCKER_HUB_USERNAME }}/doc-conversion-gateway:latest
+          docker tag doc-conversion-gateway ${{ secrets.DOCKER_HUB_USERNAME }}/doc-conversion-gateway:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/doc-conversion-gateway:latest
 
       - name: Run unit tests for doc-conversion
