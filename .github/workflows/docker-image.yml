@@ -33,26 +33,14 @@ jobs:
         run: docker-compose run --rm doc-conversion-gateway-test
 
 
-      - name: Install SonarQube Scanner
-        working-directory: ./doc-conversion
-        run: |
-            # Download and unzip SonarQube Scanner
-            curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-            unzip sonar-scanner.zip
-            # Move the scanner to a location in the PATH
-            sudo mv sonar-scanner-*/ /opt/sonar-scanner
-            sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
-          shell: bash
-            
-            # Run SonarQube scan for the 'doc-conversion' microservice
-            - name: Run SonarQube Scan for doc-conversion
-              working-directory: ./doc-conversion
-              run: |
-                # Execute the SonarQube Scanner
-                sonar-scanner
-              env:
-                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-                SONAR_HOST_URL: 'https://sonarcloud.io/'
+      - name: Run SonarQube Scan for doc-conversion
+        uses: sonarsource/sonarqube-scan-action@v2
+        with:
+          projectKey: 'AhmedSherifAbdelaty_DocumentConversion'
+          organization: 'docconversion'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: 'https://sonarcloud.io/'
 
 
 
