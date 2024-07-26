@@ -100,3 +100,4 @@ volumes:
   sonarqube_data:
   sonarqube_extensions:
   postgres_data:
+
