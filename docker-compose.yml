@@ -58,5 +58,26 @@ services:
     ports:
       - "8082:8082"
 
+
+  doc-conversion-test:
+    build:
+      context: ./doc-conversion
+      dockerfile: Dockerfile
+    container_name: doc-conversion-test
+    entrypoint: [ "mvn", "test" ]
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  doc-conversion-gateway-test:
+      build:
+        context: ./doc-conversion-gateway
+        dockerfile: Dockerfile
+      container_name: doc-conversion-gateway-test
+      entrypoint: [ "mvn", "test" ]
+      depends_on:
+        - redis
+        - doc-conversion
+
 volumes:
   postgres_data:
