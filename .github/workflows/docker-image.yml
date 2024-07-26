@@ -32,14 +32,20 @@ jobs:
       - name: Run unit tests for doc-conversion-gateway
         run: docker-compose run --rm doc-conversion-gateway-test
 
-
-      - name: SonarQube Scan
+      - name: Run SonarQube Scan for doc-conversion
+        working-directory: ./doc-conversion
         uses: sonarsource/sonarqube-scan-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: 'https://sonarcloud.io/'
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: 'https://sonarcloud.io/'
 
 
+      - name: Run SonarQube Scan for doc-conversion-gateway
+        working-directory: ./doc-conversion-gateway
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: 'https://sonarcloud.io/'
 
       - name: Shutdown Docker Compose
         run: docker-compose down
