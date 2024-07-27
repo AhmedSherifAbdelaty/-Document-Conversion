@@ -9,4 +9,4 @@ RUN mvn clean install package -DskipTests
 FROM eclipse-temurin:17-jre-alpine
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8082
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-Xms512m", "-Xmx2048m", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=200", "-XX:+PrintGCDetails", "-XX:+PrintGCDateStamps", "-Xlog:gc:/app/logs/gc.log", "-jar", "/app.jar"]

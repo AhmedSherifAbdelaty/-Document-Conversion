@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5d472bb7-a450-4147-916f-fba371a7aed1",
-		"name": "Doc-Conversion",
+		"_postman_id": "bdbe2b97-7ff7-467c-83b6-305a7cbef174",
+		"name": "Doc-Conversion-APIs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24695466",
-		"_collection_link": "https://cloudy-spaceship-30081.postman.co/workspace/My-Workspace~8aa8721d-2251-4918-8161-e208940c6626/collection/24695466-5d472bb7-a450-4147-916f-fba371a7aed1?action=share&source=collection_link&creator=24695466"
+		"_collection_link": "https://cloudy-spaceship-30081.postman.co/workspace/My-Workspace~8aa8721d-2251-4918-8161-e208940c6626/collection/24695466-bdbe2b97-7ff7-467c-83b6-305a7cbef174?action=share&source=collection_link&creator=24695466"
 	},
 	"item": [
 		{
@@ -17,8 +17,9 @@
 					"formdata": [
 						{
 							"key": "file",
+							"description": "remove this file and add yours :)",
 							"type": "file",
-							"src": "/C:/Users/user/Downloads/large_text_document (2).docx"
+							"src": "postman-cloud:///1ef43b1f-ba12-4890-bf42-34b3f35fb8d8"
 						}
 					]
 				},
