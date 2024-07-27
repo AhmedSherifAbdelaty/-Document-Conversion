@@ -15,12 +15,12 @@ Assuming the conversion from Word to any type uses the `DocumentConverter` inter
 
 ## Installation
 To set up the application, ensure that you have the following installed:
-- Java 21
+- Java 17
 - RabbitMQ
 - Redis
 - Postgres
 
-Alternatively, you can use Docker. Run maven install to  **doc-conversion** and **document-conversion-gateway** then  Navigate to the directory containing `docker-compose.yml` and run the following command:
+Alternatively, you can use Docker By Navigating to the root directory which contains `docker-compose.yml` and run the following command:
 ```
 docker-compose up
 ```
