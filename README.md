@@ -7,8 +7,8 @@ This project allows you to upload, convert, check the status, and download docum
 
 ## Architecture
 The application consists of two microservices:
-1. **doc-conversion**: Responsible for all business logic.
-2. **document-conversion-gateway**: Serves as an entry point to doc-conversion and handles rate-limiting.
+1. **doc-conversion**: Responsible for all business logic runs on port 8080.
+2. **document-conversion-gateway**: Serves as an entry point to doc-conversion and handles rate-limiting runs on port 8082.
 
 ### Design Principles
 Assuming the conversion from Word to any type uses the `DocumentConverter` interface, it is easy to implement and write the logic of any conversion type from WORD in a separate class. This design preserves the Open/Closed Principle and Single Responsibility Principle of SOLID principles. Additionally, it adheres to the Interface Segregation Principle. To add a new conversion type, simply include it in the map, making the code dynamic for multiple conversion types.
@@ -26,7 +26,7 @@ docker-compose up
 ```
 
 ## Usage
-The application provides the following endpoints which you can find in doc-conversion postman collection:
+The application provides the following endpoints which you can find in root directory `Doc-Conversion.postman_collection.json`
 
 ### Upload Document
 **POST** `/api/documents/upload`
@@ -59,7 +59,11 @@ Accepts: `documentId` as a path variable.
 Accepts: `documentId` as a path variable.
 
 ## Future Improvements
-- Implement a circuit breaker to ensure the application does not have a single point of failure.
-- Run multiple instances and balance the requests via load balancers.
-- Add various conversion types (e.g., word to txt) by implementing `DocumentConverter` and defining the required beans in a post-constructed map.
+- Implement a circuit breaker pattern using Spring Cloud Circuit Breaker or Resilience4j to ensure the application does not have a single point of failure.
+- Run multiple instances of the application and balance the requests using load balancers (e.g., Spring Cloud LoadBalancer) and service registry (e.g., Eureka, Consul).
+- Add various conversion types (e.g., Word to TXT) by implementing a DocumentConverter interface and defining the required beans in a post-constructed map.
 - Store conversion types in a database for better manageability instead of using a map for simplicity.
+- Implement OAuth2 or JWT for securing the API endpoints
+- Use HTTPS for secure communication
+- Use external storage solutions (e.g., AWS S3, Google Cloud Storage) for storing uploaded and converted documents instead of local storage
+
