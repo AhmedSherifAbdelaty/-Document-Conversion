@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    username: user
+    username: username
     password: password
     driver-class-name: org.postgresql.Driver
     hikari:
@@ -33,9 +33,9 @@ spring:
   task:
     execution:
       pool:
-        core-size: 10  #10 idle threads (Minimum)
-        max-size: 50   #grow to 50 if needed
-        queue-capacity: 1000 # queue
+        core-size: 10
+        max-size: 50
+        queue-capacity: 1000
 
 
 file:
